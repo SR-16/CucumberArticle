@@ -12,7 +12,7 @@ glue = {"stepDefs"},
 		plugin= {"pretty",
 				"html:test-output/report/HTMLReport.html",
 		}
-				//tags = "@SmokeTest"
+				
 )
 
 public class Testrunner extends AbstractTestNGCucumberTests {

@@ -1,4 +1,4 @@
-Feature: Article Create Update and Delete
+Feature: Case Study 
 
 #Login Verification
 Scenario: User Login
