@@ -9,13 +9,25 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Default suite</th></tr>
-<tr><td><a href="#t0">Default test</a></td><td class="num">4</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">11,051</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Default test</a></td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num attn">2</td><td class="num">13,424</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="4">runners.Testrunner</td><td><a href="#m0">runScenario</a></td><td rowspan="4">1772787405986</td><td rowspan="4">1407</td></tr><tr class="passedeven"><td><a href="#m1">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m2">runScenario</a></td></tr><tr class="passedeven"><td><a href="#m3">runScenario</a></td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="2">runners.Testrunner</td><td><a href="#m0">runScenario</a></td><td rowspan="2">1772789915994</td><td rowspan="2">1739</td></tr><tr class="failedeven"><td><a href="#m1">runScenario</a></td></tr><tr><th colspan="4">Default test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="2">runners.Testrunner</td><td><a href="#m2">runScenario</a></td><td rowspan="2">1772789910834</td><td rowspan="2">3414</td></tr><tr class="passedeven"><td><a href="#m3">runScenario</a></td></tr></tbody>
 </table>
-<h2>Default test</h2><h3 id="m0">runners.Testrunner#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Create Article&quot;</td><td>&quot;Case Study&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">runners.Testrunner#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Delete an Article&quot;</td><td>&quot;Case Study&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Default test</h2><h3 id="m0">runners.Testrunner#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Update an Article&quot;</td><td>&quot;Case Study&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">java.lang.AssertionError: Article update failed! expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at stepDefs.TestDefs.article_should_be_updated(TestDefs.java:127)
+	at ✽.Article Should be Updated(file:///C:/workspace/CucumberArticle/src/test/resources/features/Article.feature:25)
+</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">runners.Testrunner#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Create Article&quot;</td><td>&quot;Case Study&quot;</td></tr><tr><th colspan="2">Exception</th></tr><tr><td colspan="2"><div class="stacktrace">java.lang.AssertionError: Article creation failed! expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1590)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at stepDefs.TestDefs.article_must_be_created(TestDefs.java:95)
+	at ✽.Article must be Created(file:///C:/workspace/CucumberArticle/src/test/resources/features/Article.feature:13)
+</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 <h3 id="m2">runners.Testrunner#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;User Login&quot;</td><td>&quot;Case Study&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m3">runners.Testrunner#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Update an Article&quot;</td><td>&quot;Case Study&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">runners.Testrunner#runScenario</h3><table class="result"><tr class="param"><th>Parameter #1</th><th>Parameter #2</th></tr><tr class="param stripe"><td>&quot;Delete an Article&quot;</td><td>&quot;Case Study&quot;</td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

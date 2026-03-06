@@ -16,178 +16,142 @@ import pages.CreateEditArticle;
 import pages.DeleteArticle;
 import pages.Login;
 
-/*
- * Step Definition class
- * This class contains all step implementations for the
- * Cucumber Feature file (Login, Create Article, Update Article, Delete Article)
- */
-
 public class TestDefs {
 
     WebDriver driver;
-    Login login;
-    CreateEditArticle article;
-    DeleteArticle delete;
 
-    /*
-     * Constructor initializes driver and page objects
-     */
+    Login loginPage;
+    CreateEditArticle articlePage;
+    DeleteArticle deletePage;
+
     public TestDefs() {
 
         driver = TestBase.getdriver();
 
-        login = new Login(driver);
-        article = new CreateEditArticle(driver);
-        delete = new DeleteArticle(driver);
+        loginPage = new Login(driver);
+        articlePage = new CreateEditArticle(driver);
+        deletePage = new DeleteArticle(driver);
     }
 
-    // ===================== LOGIN TEST =====================
+    // ---------------- LOGIN SCENARIO ----------------
 
-    /*
-     * Opens the Conduit website and launches login page
-     */
     @Given("User is on login Page")
     public void user_is_on_login_page() throws IOException {
 
         TestBase.openUrl("https://conduit-realworld-example-app.fly.dev/");
-        login.launchLoginPage();
 
-        System.out.println("Login page opened successfully");
+        System.out.println("Opening Login Page");
+
+        loginPage.launchLoginPage();
     }
 
-    /*
-     * Enter username and password
-     */
     @When("User enters {string} and {string}")
-    public void user_enters_and(String name, String pwd) {
+    public void user_enters_and(String username, String password) {
 
-        login.login(name, pwd);
-        System.out.println("Credentials entered");
+        System.out.println("Entering login credentials");
+
+        loginPage.login(username, password);
     }
 
-    /*
-     * Verify login success
-     */
     @Then("User should be on Home page")
     public void user_should_be_on_home_page() {
 
-        Assert.assertTrue(login.verifyLoginSuccess(), "Login Failed!");
+        boolean loginStatus = loginPage.verifyLoginSuccess();
 
-        System.out.println("Login is successful!!!");
+        Assert.assertTrue(loginStatus, "Login Failed!");
+
+        System.out.println("Login successful. User is on Home Page.");
     }
 
+    // ---------------- CREATE ARTICLE ----------------
 
-    // ===================== CREATE ARTICLE =====================
-
-    /*
-     * Navigate to article creation page
-     */
     @Given("User should be Article Page")
     public void user_should_be_article_page() {
 
-        article.launchArticle();
+        articlePage.launchArticle();
 
-        // Assertion to confirm user is on article page
-        Assert.assertTrue(article.isArticlePageDisp(), "Article Page not displayed!");
+        boolean pageOpened = articlePage.isArticlePageDisp();
 
-        System.out.println("User is on Article Creation Page");
+        Assert.assertTrue(pageOpened, "Article page did not open!");
+
+        System.out.println("Navigated to Article Creation Page");
     }
 
-    /*
-     * Enter article details and publish article
-     */
     @When("User Create Article {string} and {string} and {string} and {string}")
-    public void user_create_article_and_and_and(String title, String desc, String body, String tag) {
+    public void user_create_article_and_and_and(String title, String description, String body, String tag) {
 
-        System.out.println("Entering Article Details");
+        System.out.println("Entering article details");
 
-        article.enterArticleDetails(title, desc, body, tag);
-        article.publishArticle();
+        articlePage.enterArticleDetails(title, description, body, tag);
+
+        articlePage.publishArticle();
     }
 
-    /*
-     * Verify article creation success
-     */
     @Then("Article must be Created")
     public void article_must_be_created() {
 
-        boolean success = article.verifyHeader();
+        boolean articleCreated = articlePage.verifyHeader();
 
-        // Assertion to verify article creation
-        Assert.assertTrue(success, "Article Creation Failed!");
+        Assert.assertTrue(articleCreated, "Article creation failed!");
 
         System.out.println("New Article Published Successfully");
     }
 
+    // ---------------- UPDATE ARTICLE ----------------
 
-    // ===================== UPDATE ARTICLE =====================
-
-    /*
-     * Update existing article using DataTable
-     */
     @When("User Update an Article")
     public void user_update_an_article(DataTable dataTable) {
 
-        List<Map<String, String>> users = dataTable.asMaps(String.class, String.class);
+        List<Map<String, String>> articleData = dataTable.asMaps(String.class, String.class);
 
-        String oldTitle = users.get(0).get("oldtitle");
-        String newTitle = users.get(0).get("newtitle");
-        String desc = users.get(0).get("desc");
-        String body = users.get(0).get("body");
-        String tag = users.get(0).get("tag");
+        String oldTitle = articleData.get(0).get("oldtitle");
+        String newTitle = articleData.get(0).get("newtitle");
+        String description = articleData.get(0).get("desc");
+        String body = articleData.get(0).get("body");
+        String tag = articleData.get(0).get("tag");
 
         System.out.println("Updating Article from: " + oldTitle + " to: " + newTitle);
 
-        article.editArticle();
-        article.updateArticleDetails(newTitle, desc, body, tag);
-        article.publishArticle();
+        articlePage.editArticle();
+
+        articlePage.updateArticleDetails(newTitle, description, body, tag);
+
+        articlePage.publishArticle();
     }
 
-    /*
-     * Verify article update
-     */
     @Then("Article Should be Updated")
     public void article_should_be_updated() {
 
-        boolean success = article.verifyHeader();
+        boolean articleUpdated = articlePage.verifyHeader();
 
-        // Assertion to confirm update success
-        Assert.assertTrue(success, "Article Update Failed!");
+        Assert.assertTrue(articleUpdated, "Article update failed!");
 
         System.out.println("Article Updated Successfully");
     }
 
+    // ---------------- DELETE ARTICLE ----------------
 
-    // ===================== DELETE ARTICLE =====================
-
-    /*
-     * Delete article using DataTable input
-     */
     @When("User Delete an Article")
     public void user_delete_an_article(DataTable dataTable) {
 
-        List<Map<String, String>> users = dataTable.asMaps(String.class, String.class);
+        List<Map<String, String>> articleData = dataTable.asMaps(String.class, String.class);
 
-        String title1 = users.get(0).get("title");
+        String articleTitle = articleData.get(0).get("title");
 
-        System.out.println("Attempting to delete article: " + title1);
+        System.out.println("Deleting article: " + articleTitle);
 
-        if (title1.equalsIgnoreCase("SHIV888")) {
+        if (articleTitle.equalsIgnoreCase("SHIV888")) {
 
-            delete.DeleteArtcile();
+            deletePage.DeleteArticle1();
         }
     }
 
-    /*
-     * Verify article deletion
-     */
     @Then("Article Should be Deleted")
     public void article_should_be_deleted() {
 
-        boolean deleteCheck = delete.isDeleted();
+        boolean deletedStatus = deletePage.isDeleted();
 
-        // Assertion to confirm deletion
-        Assert.assertTrue(deleteCheck, "Article Deletion Failed!");
+        Assert.assertTrue(deletedStatus, "Article deletion failed!");
 
         System.out.println("Article Deleted Successfully");
     }
